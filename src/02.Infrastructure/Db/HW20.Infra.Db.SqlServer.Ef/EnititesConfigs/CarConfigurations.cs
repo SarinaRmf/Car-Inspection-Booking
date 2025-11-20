@@ -24,6 +24,9 @@ namespace HW20.Infra.Db.SqlServer.Ef.EnititesConfigs
             builder.HasOne(c => c.Model)
                 .WithMany(m => m.Cars)
                 .HasForeignKey(c => c.ModelId); 
+            builder.HasMany(c => c.CarImages)
+                .WithOne(i=> i.Car)
+                .HasForeignKey(i => i.CarId);
         }
     }
 }

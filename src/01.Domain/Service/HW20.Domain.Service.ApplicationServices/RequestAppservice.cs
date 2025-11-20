@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HW20.Domain.Service.ApplicationServices
 {
-    public class RequestAppservice(IRequestService requestService, ICarOwnerService carOwnerService, ICarService carService) : IRequestAppService
+    public class RequestAppservice(IRequestService requestService, ICarOwnerService carOwnerService, ICarService carService,ICarImageService carImageService) : IRequestAppService
     {
         public List<GetRequestDto> Filter(FilterModel filter)
         {
@@ -44,6 +44,14 @@ namespace HW20.Domain.Service.ApplicationServices
 
             createRequestDto.CarId = carId;
 
+            if (createCarDto.ImageFiles != null)
+            {
+
+                foreach (var file in createCarDto.ImageFiles)
+                {
+                    carImageService.Create(carId, file);
+                }
+            }
             if (requestService.RequestedBefore(carId, createRequestDto.ReservationDate))
             {
                 return ResultDto<bool>.Failure("خودرو فقط یک بار در سال میتواند در خواست معاینه فنی داشته باشد!");

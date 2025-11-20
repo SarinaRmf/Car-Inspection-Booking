@@ -16,6 +16,7 @@ namespace HW20.Infra.Db.SqlServer.Ef
         public DbSet<Request> Requests { get; set; }
         public DbSet<CarModel> CarModels { get; set; }  
         public DbSet<User> Users { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

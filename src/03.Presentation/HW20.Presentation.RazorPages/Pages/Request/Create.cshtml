@@ -15,7 +15,7 @@
     
 
     <div class="container">
-        <form method = "post">
+        <form method = "post" enctype="multipart/form-data">
             <h1>رزرو نوبت معاینه فنی</h1>
 
             <div class="form-item">
@@ -67,7 +67,10 @@
                 <label>آدرس</label>
                 <input type="text" placeholder="آدرس دقیق محل سکونت" asp-for="ownerDto.Address">
             </div>
-
+            <div class="form-item">
+                <label>تصاویر خودرو</label>
+                <input type="file" asp-for="createCarDto.ImageFiles" multiple>
+            </div>
             <div class="form-item">
                 <button type="submit">ثبت درخواست</button>
             </div>

@@ -1,5 +1,6 @@
 ﻿using HW20.Domain.Core.Entities;
 using HW20.Domain.Core.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace HW20.Domain.Core.Dtos.Car
         public ManufacturerEnum Company { get; set; }
         public int ModelId { get; set; }
         public int OwnerId { get; set; }
+        public List<IFormFile>? ImageFiles { get; set; }
     }
 }

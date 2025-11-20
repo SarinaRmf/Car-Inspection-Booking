@@ -41,6 +41,9 @@ namespace HW20.Presentation.RazorPages
             builder.Services.AddScoped<ICarOwnerService,CarOwnerService>();
 
             builder.Services.AddScoped<ICookieService, CookieService>();
+            builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<ICarImageService,CarImageService>();
+            builder.Services.AddScoped<ICarImageRepository,CarImageRepository>();
             #endregion
 
             var app = builder.Build();
