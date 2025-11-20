@@ -1,0 +1,83 @@
+﻿@page
+@model HW20.Presentation.RazorPages.Pages.Request.CreateModel
+@{
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزرو نوبت معاینه فنی</title>
+    <link rel="stylesheet" href="~/css/createRequest.css">
+</head>
+<body>
+
+    
+
+    <div class="container">
+        <form method = "post">
+            <h1>رزرو نوبت معاینه فنی</h1>
+
+            <div class="form-item">
+                <label>کد ملی</label>
+                <input type="text" placeholder="0024095621" maxlength="10" asp-for="ownerDto.IdentityCode">
+            </div>
+
+            <div class="form-item">
+                <label>شماره همراه</label>
+                <input type="tel" placeholder="09121234567" maxlength="11" asp-for="ownerDto.Phone">
+            </div>
+
+            <div class="form-item">
+                <label>پلاک خودرو</label>
+                <input type="text" placeholder="مثلاً: ۱۲ب۳۴۵ ایران ۶۶" asp-for="createCarDto.NumberPlate">
+            </div>
+
+            <div class="form-item">
+                <label>مدل خودرو</label>
+                <select asp-for="createCarDto.ModelId">
+                    <option value="" readonly>انتخاب مدل</option>
+                @foreach(var item in Model.CarModels)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label>شرکت خودرو</label>
+                <select asp-for="createCarDto.Company">
+                    <option value="" readonly>انتخاب</option>
+                    <option value="1">ایران خودرو</option>
+                    <option value="2">سایپا</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label>سال تولید</label>
+                <input type="type" asp-for="createCarDto.ProducedAt">
+            </div>
+
+            <div class="form-item">
+                <label> تاریخ نوبت</label>
+                <input type="date" asp-for="requestDto.ReservationDate">
+            </div>
+
+            <div class="form-item">
+                <label>آدرس</label>
+                <input type="text" placeholder="آدرس دقیق محل سکونت" asp-for="ownerDto.Address">
+            </div>
+
+            <div class="form-item">
+                <button type="submit">ثبت درخواست</button>
+            </div>
+        </form>
+        <div class ="message-box">
+            <p>
+                @Model.Message
+            </p>
+    </div>
+    </div>
+
+</body>
+</html>

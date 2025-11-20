@@ -1,0 +1,51 @@
+﻿@page
+@model HW20.Presentation.RazorPages.Pages.Home.IndexModel
+@{
+}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/home.css">
+</head>
+<body>
+
+    <div class="intro">
+        <div class="details">
+            <div>
+                <p>
+            در اینجا می‌توانید به‌صورت سریع و بدون اتلاف وقت، نوبت خود را برای معاینه فنی خودرو ثبت کنید.
+                </p>
+                <p>هدف ما ارائه خدمتی آسان است تا فرآیند معاینه فنی برای شما بدون صف و بدون معطلی انجام شود.</p>
+            </div>
+            <div class="reserve-btn">
+                <a asp-page="/Request/Create"><button>رزرو نوبت معاینه فنی</button></a>
+            </div>
+        </div>
+        
+        <img src="/images/body.png" alt="">
+    </div>
+
+    <div class="category-group">
+        <div class="title">
+            <h1>چک‌های ایمنی خودرو در معاینه فنی</h1>
+        </div>
+        <div class="cards">
+            <div class="category" style="background-color:#FFE9F2;">
+            <h4>سیستم ترمز</h4>
+            <p>اطمینان از عملکرد صحیح ترمزها و نبود نقص در سیستم ترمز.</p>
+        </div>
+        <div class="category" style="background-color: #E6F2FF;">
+            <h4>چراغ‌ها و سیستم روشنایی</h4>
+            <p>بررسی چراغ‌های جلو، عقب، مه‌شکن، راهنما و چراغ‌های هشدار.</p>
+        </div>
+        <div class="category" style="background-color:#E9FFF4;">
+            <h4>موتور و انتشار آلاینده</h4>
+            <p>بررسی عملکرد موتور و میزان آلایندگی خودرو (آلودگی هوا).</p>
+        </div>
+        <div class="category" style="background-color: #FFEFE5;">
+            <h4>سیستم تعلیق و فرمان</h4>
+            <p>اطمینان از صحت کمک‌فنرها، محور چرخ‌ها و سیستم فرمان.</p>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

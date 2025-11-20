@@ -1,0 +1,32 @@
+﻿@page
+@model HW20.Presentation.RazorPages.Pages.Account.LoginModel
+@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/Login.css">
+</head>
+<body>
+
+    <div class = "Login">
+        <form class="box" method = "post">
+        <h2>ورود</h2>
+        <lable>نام کاربری</lable>
+        <input type="text" placeholder="Username" asp-for="Admin.UserName" required />
+        <lable>رمز عبور</lable>
+        <input type="password" placeholder="Password" asp-for="Admin.Password" required />
+
+        <button type="submit">ورود</button>
+    </form>
+    <div class ="message-box">
+            <p>
+                @Model.Message
+            </p>
+    </div>
+    </div>
+</body>
+</html>
+

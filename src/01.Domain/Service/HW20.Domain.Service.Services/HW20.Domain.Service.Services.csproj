@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\HW20.Framework\HW20.Framework.csproj" />
+    <ProjectReference Include="..\..\Core\HW20.Domain.Core\HW20.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

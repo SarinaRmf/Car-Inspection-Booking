@@ -1,0 +1,161 @@
+﻿@page
+@model HW20.Presentation.RazorPages.Pages.Request.IndexModel
+@{
+}
+
+<head>
+    <style>
+        .container {
+            direction: rtl;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .btn-add {
+            background: #3b82f6;
+            color: #fff;
+            margin: 15px 0;
+            
+        }
+
+        .btn-add:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-edit {
+            background-color: #22c55e;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #16a34a;
+        }
+
+        .btn-delete {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
+        table {
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #ddd;
+            direction: rtl;
+        }
+
+        th, td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .filter-box {
+        margin-bottom: 15px;
+        padding: 10px 0;
+    }
+
+    .filter-form {
+        display: flex;
+        gap: 10px;
+        direction: rtl;
+        align-items: center;
+    }
+
+    .filter-select {
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        background: white;
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+
+<div class="container">
+    <h1>مدیریت درخواست ها</h1>
+    <div class="filter-box">
+        <form method="post" class="filter-form">
+            
+            <input type="date" asp-for="filterModel.Date" placehoder = "فیلتر تاریخ درخواست" />
+
+            <select asp-for="filterModel.Manufacturer" class="filter-select">
+                <option value="">شرکت خودرو</option>
+                <option value="IranKhodro">ایران‌خودرو</option>
+                <option value="Saipa">سایپا</option>
+            </select>
+
+            <button class="btn btn-add" type="submit">اعمال فیلتر</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>پلاک خودرو</th>
+                <th>مدل خودرو</th>
+                <th>کد ملی</th>
+                <th>شماره تماس</th>
+                <th>تاریخ رزرو</th>
+                <th>شرکت خودرو</th>
+                <th>پذیرش شده</th>
+                <th>تایید شده</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach(var item in Model.Requests)
+            {
+                <tr>
+                    <td>@item.NumberPlate</td>
+                    <td>@item.CarModel</td>
+                    <td>@item.IdentityCode</td>
+                    <td>@item.Phone</td>
+                    <td>@item.ReservationDate</td>
+                    <td>@(item.Manufacturer == Domain.Core.Enums.ManufacturerEnum.IranKhodro ? "ایران‌خودرو" : "سایپا")</td>
+                    <td>@(item.Unacceptable ? "رد شده" : "پذیرش شده")</td>
+                    <td>@(item.IsApproved ? "تایید شده" : "تایید نشده")</td>
+                   
+
+                    @if(item.IsApproved)
+                    {
+                        <td><a asp-route-Id="@item.Id" asp-page-handler="UnAccept" class="btn btn-edit" style = "background-color: red ">رد درخواست</a></td>
+                    }
+                    else
+                    {
+                        <td><a asp-route-Id="@item.Id" asp-page-handler="Accept" class="btn btn-edit"> تایید درخواست</a></td>
+                    }
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+
+</html>
