@@ -17,16 +17,26 @@ namespace HW20.Domain.Service.Services
     public class RequestService(IRequestRepository _repo, ICarService carService) : IRequestService
     {
 
+        public bool IsEvenDate(DateTime date)
+        {
+            if(date.DayOfWeek == DayOfWeek.Saturday ||
+                date.DayOfWeek == DayOfWeek.Monday ||
+                date.DayOfWeek == DayOfWeek.Wednesday)
+            {
+                return true;
+            }
+            return false;
+        }
         public ResultDto<bool> ValidateDay(ManufacturerEnum manufacturer, DateTime reservationDate)
         {
-            if (reservationDate < DateTime.Now) {
+            if (reservationDate.Date < DateTime.Now.Date) {
                 return ResultDto<bool>.Failure("لطفا تاریخ درستی را وارد کنید!");
             }
-            if (reservationDate.Day % 2 == 0 && manufacturer == Core.Enums.ManufacturerEnum.SAIPA)
+            if (IsEvenDate(reservationDate) && manufacturer == Core.Enums.ManufacturerEnum.SAIPA)
             {
                 return ResultDto<bool>.Failure("سایپا  فقط در روزهای فرد پذیرش می شود!");
             }
-            if (reservationDate.Day % 2 != 0 && manufacturer == Core.Enums.ManufacturerEnum.IranKhodro)
+            if (!IsEvenDate(reservationDate) && manufacturer == Core.Enums.ManufacturerEnum.IranKhodro)
             {
                 return ResultDto<bool>.Failure("ایران خودرو فقط در روزهای زوج پذیرش می شود!");
             }
