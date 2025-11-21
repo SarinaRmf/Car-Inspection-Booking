@@ -1,4 +1,5 @@
 ﻿@page
+@using HW20.Domain.Core.Extensions
 @model HW20.Presentation.RazorPages.Pages.Request.IndexModel
 @{
 }
@@ -104,8 +105,23 @@
     <div class="filter-box">
         <form method="post" class="filter-form">
             
-            <input type="date" asp-for="filterModel.Date" placehoder = "فیلتر تاریخ درخواست" />
+            <input type="text" id="filterDate" asp-for="ShamsiDate" placehoder = "فیلتر تاریخ درخواست" />
+            @section Scripts {
+            <script>
+                 $(document).ready(function () {
 
+                 $("#filterDate").persianDatepicker({
+                    observer: true,
+                    format: 'YYYY/MM/DD',
+                    calendarType: 'persian',
+                    autoClose: true,
+                    initialValue: false,
+                    persianDigit: false
+                });
+
+           });
+            </script>
+            }
             <select asp-for="filterModel.Manufacturer" class="filter-select">
                 <option value="">شرکت خودرو</option>
                 <option value="IranKhodro">ایران‌خودرو</option>
@@ -138,7 +154,7 @@
                     <td>@item.CarModel</td>
                     <td>@item.IdentityCode</td>
                     <td>@item.Phone</td>
-                    <td>@item.ReservationDate</td>
+                    <td>@item.ReservationDate.ToShamsi()</td>
                     <td>@(item.Manufacturer == Domain.Core.Enums.ManufacturerEnum.IranKhodro ? "ایران‌خودرو" : "سایپا")</td>
                     <td>@(item.Unacceptable ? "رد شده" : "پذیرش شده")</td>
                     <td>@(item.IsApproved ? "تایید شده" : "تایید نشده")</td>

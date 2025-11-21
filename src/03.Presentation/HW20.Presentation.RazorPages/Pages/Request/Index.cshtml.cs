@@ -1,6 +1,7 @@
 using HW20.Domain.Core.Contracts.ApplicationServices;
 using HW20.Domain.Core.Dtos._common;
 using HW20.Domain.Core.Dtos.Request;
+using HW20.Domain.Core.Extensions;
 using HW20.Framework;
 using HW20.Presentation.RazorPages.Extentions;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,22 @@ namespace HW20.Presentation.RazorPages.Pages.Request
 
         [BindProperty]
         public FilterModel filterModel { get; set; }
+
+        [BindProperty]
+        public string ShamsiDate { get; set; }
+
         public void OnGet()
         {
-            //foreach (var request in Requests) { 
             
-            //    request.ReservationDate = DateConvertor.MiladiToShamsi(request.ReservationDate);
-            //}
             Requests = requestAppService.GetAll();
             
         }
-        public void OnPost() { 
+        public void OnPost() {
+            if (!string.IsNullOrWhiteSpace(ShamsiDate))
+            {
+                filterModel.Date = ShamsiDate.ToGregorianDateTime();
+
+            }
             Requests = requestAppService.Filter(filterModel);
             
         }

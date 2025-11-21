@@ -63,9 +63,37 @@
             </div>
 
             <div class="form-item">
-                <label> تاریخ نوبت</label>
-                <input type="date" asp-for="requestDto.ReservationDate" class="normal-example">
-            </div>
+    <label>تاریخ رزرو (شمسی)</label>
+    <input type="text" asp-for="ShamsiReservationDate" id="shamsiDate" placeholder="1403/11/25" />
+</div>
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+
+        $("#shamsiDate").persianDatepicker({
+            observer: true,
+            format: 'YYYY/MM/DD',
+            calendarType: 'persian',
+            autoClose: true,
+            initialValue: false,
+            calendar: {
+                persian: {
+                    locale: 'fa',
+                    showHint: true,
+                    leapYearMode: "astronomical"
+                }
+            },
+            persianDigit: false,
+            toolbox: { enabled: true },
+            navigator: { enabled: true }
+        });
+
+    });
+</script>
+}
+
+
 
             <div class="form-item">
                 <label>آدرس</label>
@@ -85,8 +113,5 @@
             </p>
     </div>
     </div>
-    <script>
-        $('.normal-example').persianDatepicker();
-    </script>
 </body>
 </html>
