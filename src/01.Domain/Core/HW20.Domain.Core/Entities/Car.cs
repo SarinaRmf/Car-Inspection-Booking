@@ -18,6 +18,6 @@ namespace HW20.Domain.Core.Entities
         public List<Request>? Requests { get; set; }
         public CarOwner Owner { get; set; }
         public int OwnerId { get; set; }
-        public List<CarImage>? CarImages { get; set; }
+        
     }
 }

@@ -126,6 +126,7 @@
                 <th>شرکت خودرو</th>
                 <th>پذیرش شده</th>
                 <th>تایید شده</th>
+                <th>مشاهده تصاویر</th>
             </tr>
         </thead>
         <tbody>
@@ -141,7 +142,7 @@
                     <td>@(item.Manufacturer == Domain.Core.Enums.ManufacturerEnum.IranKhodro ? "ایران‌خودرو" : "سایپا")</td>
                     <td>@(item.Unacceptable ? "رد شده" : "پذیرش شده")</td>
                     <td>@(item.IsApproved ? "تایید شده" : "تایید نشده")</td>
-                   
+                    <td><a asp-page="GetImages" asp-route-id="@item.Id"><button class="btn btn-edit" style = "background-color: orange ">مشاهده ی تصاویر</button></a></td>
 
                     @if(item.IsApproved)
                     {

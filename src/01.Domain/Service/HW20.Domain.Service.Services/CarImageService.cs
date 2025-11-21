@@ -12,11 +12,28 @@ namespace HW20.Domain.Service.Services
 {
     public class CarImageService(IFileService fileService, ICarImageRepository _repo) : ICarImageService
     {
-        public void Create(int carId, IFormFile file)
+        public void Create(int requestId, List<IFormFile> files)
         {
-            var path = fileService.Upload(file,"CarImages");
+            var images = new List<CarImage>();
 
-            _repo.Create(carId ,path);
+            foreach(var file in files)
+            {
+                var path = fileService.Upload(file, "CarImages");
+
+                var image = new CarImage
+                {
+                    ImagePath = path,
+                    RequestId = requestId
+                };
+                images.Add(image);
+            }
+
+            _repo.Create(images);
+        }
+
+        public List<string> GetAll(int requestId) {
+
+            return _repo.GetAll(requestId);
         }
     }
 }

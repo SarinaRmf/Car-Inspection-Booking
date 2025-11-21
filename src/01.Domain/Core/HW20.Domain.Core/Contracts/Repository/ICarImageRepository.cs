@@ -9,6 +9,7 @@ namespace HW20.Domain.Core.Contracts.Repository
 {
     public interface ICarImageRepository
     {
-        void Create(int carId, string ImagePath);
+        void Create(List<CarImage> carImages);
+        List<string> GetAll(int requestId);
     }
 }

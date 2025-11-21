@@ -17,6 +17,10 @@ namespace HW20.Infra.Db.SqlServer.Ef.EnititesConfigs
                 .WithMany(c => c.Requests)
                 .HasForeignKey(r => r.CarId);
 
+            builder.HasMany(r => r.CarImages)
+                .WithOne(i => i.Request)
+                .HasForeignKey(i => i.RequestId);
+
         }
     }
 }

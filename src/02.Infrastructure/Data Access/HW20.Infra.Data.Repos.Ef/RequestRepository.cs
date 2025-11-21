@@ -9,7 +9,7 @@ namespace HW20.Infra.Data.Repos.Ef
 {
     public class RequestRepository(AppDbContext _context) : IRequestRepository
     {
-        public bool Create(CreateRequestDto requestDto)
+        public int Create(CreateRequestDto requestDto)
         {
 
             var entity = new Request()
@@ -22,7 +22,8 @@ namespace HW20.Infra.Data.Repos.Ef
                 
             };
             _context.Add(entity);
-            return _context.SaveChanges() > 0;
+            _context.SaveChanges();
+            return entity.Id;
         }
         public List<GetRequestDto> GetRequests()
         {

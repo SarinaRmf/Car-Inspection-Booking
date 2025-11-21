@@ -9,6 +9,7 @@ namespace HW20.Domain.Core.Contracts.Services
 {
     public interface ICarImageService
     {
-        void Create(int carId, IFormFile file);
+        void Create(int requestId, List<IFormFile> files);
+        List<string> GetAll(int requestId);
     }
 }

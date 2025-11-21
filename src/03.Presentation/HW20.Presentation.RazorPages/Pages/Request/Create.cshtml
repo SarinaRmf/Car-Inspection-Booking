@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>رزرو نوبت معاینه فنی</title>
     <link rel="stylesheet" href="~/css/createRequest.css">
+    @* <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://unpkg.com/persian-date@latest/dist/persian-date.js"></script>
+    <script src="https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.js"></script> *@
 </head>
 <body>
 
@@ -60,7 +64,7 @@
 
             <div class="form-item">
                 <label> تاریخ نوبت</label>
-                <input type="date" asp-for="requestDto.ReservationDate">
+                <input type="date" asp-for="requestDto.ReservationDate" class="normal-example">
             </div>
 
             <div class="form-item">
@@ -69,7 +73,7 @@
             </div>
             <div class="form-item">
                 <label>تصاویر خودرو</label>
-                <input type="file" asp-for="createCarDto.ImageFiles" multiple>
+                <input type="file" asp-for="requestDto.ImageFiles" multiple>
             </div>
             <div class="form-item">
                 <button type="submit">ثبت درخواست</button>
@@ -81,6 +85,8 @@
             </p>
     </div>
     </div>
-
+    <script>
+        $('.normal-example').persianDatepicker();
+    </script>
 </body>
 </html>

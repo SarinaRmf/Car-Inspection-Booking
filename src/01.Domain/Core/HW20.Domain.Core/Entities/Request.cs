@@ -15,5 +15,6 @@ namespace HW20.Domain.Core.Entities
         public int CarId { get; set; }
         public bool IsApproved { get; set; }
         public bool Unacceptable { get; set; }
+        public List<CarImage>? CarImages { get; set; }
     }
 }

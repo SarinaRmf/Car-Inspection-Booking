@@ -13,7 +13,7 @@ namespace HW20.Domain.Core.Contracts.Services
     {
         ResultDto<bool> ValidateDay(ManufacturerEnum manufacturer, DateTime reservationDate);
         ResultDto<bool> CheckCapacity(DateTime reservationDate);
-        ResultDto<bool> SubmitRequest(CreateRequestDto createRequestDto);
+        ResultDto<int> SubmitRequest(CreateRequestDto createRequestDto);
         bool RequestedBefore(int carId, DateTime reservationDate);
         List<GetRequestDto> GetAll();
         List<GetRequestDto> Filter(FilterModel filter);

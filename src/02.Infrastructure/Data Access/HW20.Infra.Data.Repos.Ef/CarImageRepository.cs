@@ -11,15 +11,14 @@ namespace HW20.Infra.Data.Repos.Ef
 {
     public class CarImageRepository(AppDbContext _context) : ICarImageRepository
     {
-        public void Create(int carId, string ImagePath) { 
+        public void Create(List<CarImage> carImages) { 
         
-            var carImage = new CarImage
-            {
-                CarId = carId,  
-                ImagePath = ImagePath
-            };
-            _context.CarImages.Add(carImage);
+            _context.CarImages.AddRange(carImages);
             _context.SaveChanges();
+        }
+        public List<string> GetAll(int requestId)
+        {
+            return _context.CarImages.Where(i => i.RequestId == requestId).Select(i => i.ImagePath).ToList();
         }
     }
 }

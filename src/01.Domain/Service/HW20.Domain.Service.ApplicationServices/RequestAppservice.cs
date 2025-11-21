@@ -44,14 +44,7 @@ namespace HW20.Domain.Service.ApplicationServices
 
             createRequestDto.CarId = carId;
 
-            if (createCarDto.ImageFiles != null)
-            {
-
-                foreach (var file in createCarDto.ImageFiles)
-                {
-                    carImageService.Create(carId, file);
-                }
-            }
+            
             if (requestService.RequestedBefore(carId, createRequestDto.ReservationDate))
             {
                 return ResultDto<bool>.Failure("خودرو فقط یک بار در سال میتواند در خواست معاینه فنی داشته باشد!");
@@ -78,9 +71,15 @@ namespace HW20.Domain.Service.ApplicationServices
             if (result.IsSuccess == false) {
                 return ResultDto<bool>.Failure(result.Message);
             }
+
             if (createRequestDto.Unacceptable)
             {
                 return ResultDto<bool>.Failure("طول عمر خودرو بیشتر از 5 سال است! درخواست پذیرفته نمی شود!.");
+            }
+
+            if (createRequestDto.ImageFiles != null)
+            {
+                carImageService.Create(result.Data , createRequestDto.ImageFiles);
             }
             return ResultDto<bool>.Success(result.Message);
         }

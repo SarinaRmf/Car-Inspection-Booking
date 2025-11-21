@@ -16,6 +16,6 @@ namespace HW20.Domain.Core.Dtos.Car
         public ManufacturerEnum Company { get; set; }
         public int ModelId { get; set; }
         public int OwnerId { get; set; }
-        public List<IFormFile>? ImageFiles { get; set; }
+        
     }
 }

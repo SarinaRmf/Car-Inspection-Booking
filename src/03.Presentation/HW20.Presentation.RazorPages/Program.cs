@@ -44,6 +44,7 @@ namespace HW20.Presentation.RazorPages
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ICarImageService,CarImageService>();
             builder.Services.AddScoped<ICarImageRepository,CarImageRepository>();
+            builder.Services.AddScoped<ICarImageAppService,CarImageAppService>();
             #endregion
 
             var app = builder.Build();

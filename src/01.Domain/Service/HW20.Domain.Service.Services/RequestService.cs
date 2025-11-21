@@ -5,6 +5,7 @@ using HW20.Domain.Core.Dtos._common;
 using HW20.Domain.Core.Dtos.Car;
 using HW20.Domain.Core.Dtos.Request;
 using HW20.Domain.Core.Enums;
+using HW20.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,9 @@ namespace HW20.Domain.Service.Services
 
         public ResultDto<bool> ValidateDay(ManufacturerEnum manufacturer, DateTime reservationDate)
         {
-
+            if (reservationDate < DateTime.Now) {
+                return ResultDto<bool>.Failure("لطفا تاریخ درستی را وارد کنید!");
+            }
             if (reservationDate.Day % 2 == 0 && manufacturer == Core.Enums.ManufacturerEnum.SAIPA)
             {
                 return ResultDto<bool>.Failure("سایپا  فقط در روزهای فرد پذیرش می شود!");
@@ -29,10 +32,13 @@ namespace HW20.Domain.Service.Services
             }
             return ResultDto<bool>.Success("");
         }
+
         public List<GetRequestDto> GetAll()
         {
+
             return _repo.GetRequests();
         }
+
         public ResultDto<bool> CheckCapacity(DateTime reservationDate) { 
         
         
@@ -52,18 +58,23 @@ namespace HW20.Domain.Service.Services
             }
             return ResultDto<bool>.Success("");
         }
+
         public bool RequestedBefore(int carId,DateTime reservationDate)
         {
             return _repo.RequestedThisYear(carId, reservationDate);
         }
-        public ResultDto<bool> SubmitRequest(CreateRequestDto createRequestDto) {
+        public ResultDto<int> SubmitRequest(CreateRequestDto createRequestDto) {
 
-            if (_repo.Create(createRequestDto))
+            //createRequestDto.ReservationDate = DateConvertor.PersianToGregorian(createRequestDto.ReservationDate);
+
+            var requestId = _repo.Create(createRequestDto);
+            if (requestId > 0)
             {
-                return ResultDto<bool>.Success("در خواست با موفقیت ثبت شد.");
+                return ResultDto<int>.Success("در خواست با موفقیت ثبت شد.", requestId);
             }
-            return ResultDto<bool>.Failure("درخواست ثبت نشد! دوباره تلاش کنید!");
+            return ResultDto<int>.Failure("درخواست ثبت نشد! دوباره تلاش کنید!");
         }
+
         public List<GetRequestDto> Filter(FilterModel filter) {
         
             return _repo.Filter(filter);
@@ -73,6 +84,7 @@ namespace HW20.Domain.Service.Services
         {
             return _repo.Get(requestId);
         }
+
         public bool SetApproveValue(int requestId, bool input)
         {
             return _repo.SetApproveValue(requestId, input);

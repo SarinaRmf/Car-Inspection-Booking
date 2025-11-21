@@ -11,7 +11,7 @@ namespace HW20.Domain.Core.Contracts.Repository
 {
     public interface IRequestRepository
     {
-        bool Create(CreateRequestDto requestDto);
+        int Create(CreateRequestDto requestDto);
         List<GetRequestDto> GetRequests();
         bool SetApproveValue(int requestId, bool input);
         int GetRequestCount(DateTime reservationDate);
